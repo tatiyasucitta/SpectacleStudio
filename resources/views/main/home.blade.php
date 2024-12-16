@@ -22,7 +22,7 @@
                     <a href="{{ route('category.show', $cat->id) }}" class="text-decoration-none">
                         <div class="card border-0 shadow-sm" style="background-color: #F4F4F2; border-radius: 10px;">
                             <!-- Ensure all category images are .png -->
-                            <img src="{{ asset('images/categories/' . $cat->name . '.png') }}" 
+                            <img src="{{ $cat->image }}" 
                                  alt="{{ $cat->name }}" 
                                  class="card-img-top" 
                                  style="height: 200px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px;">

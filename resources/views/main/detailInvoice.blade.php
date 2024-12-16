@@ -15,6 +15,7 @@
                     <th scope="col">No</th>
                     <th scope="col">Product Name</th>
                     <th scope="col">Image</th>
+                    <th scope="col">Quantity</th>
                     <th scope="col">Price</th>
                 </tr>
             </thead>
@@ -26,7 +27,10 @@
                         <h5 class="card-title">{{$items[$i]->product[0]->name}}</h5>
                     </td>
                     <td>
-                        <img src="{{asset('/storage/public/images/products/'.$items[$i]->product[0]->image)}}" class="card-img-top w-25" alt="">
+                        <img src="{{ $items[$i]->product[0]->image }}" class="card-img-top w-25" alt="">
+                    </td>
+                    <td>
+                        <p class="card-price">{{$items[$i]->product[0]->stock}}</p>
                     </td>
                     <td>
                         <p class="card-price">${{$items[$i]->product[0]->price}}</p>

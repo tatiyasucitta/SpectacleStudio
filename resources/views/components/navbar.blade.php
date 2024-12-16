@@ -14,7 +14,7 @@
                         <a class="nav-link text-light" href="{{route('createitem')}}">Upload New Product</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{route('createcategory')}}">Create Category</a>
+                        <a class="nav-link text-light" href="{{route('categories')}}">View Category</a>
                     </li>
                 @else
                     <li class="nav-item">

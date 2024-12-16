@@ -8,6 +8,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Product Image</th>
                     <th>Name</th>
                     <th>Price</th>
@@ -17,10 +18,17 @@
                 </tr>
             </thead>
             <tbody>
+                @php
+                    $i =0;
+                @endphp
                 @foreach($items as $item)
                     <tr>
+                        <th scope="row">{{$i+1}}</th>
+                        @php
+                            $i++;
+                        @endphp
                         <td class="text-center">
-                            <img src="{{ asset('/storage/public/images/products/'.$item->product[0]->image) }}" alt="{{ $item->product[0]->name }}" class="img-fluid" style="max-width: 200px; height: auto; display: block; margin: 0 auto;">
+                            <img src="{{ $item->product[0]->image }}" alt="{{ $item->product[0]->name }}" class="img-fluid" style="max-width: 200px; height: auto; display: block; margin: 0 auto;">
                         </td>
                         <td>{{ $item->product[0]->name }}</td>
                         <td>${{ $item->product[0]->price }}</td>

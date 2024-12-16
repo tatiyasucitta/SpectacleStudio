@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->decimal('price', 8, 2);
             $table->UnsignedBigInteger('stock');
-            $table->string('image')->nullable();
+            $table->longText('image')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')
                 ->references('id')

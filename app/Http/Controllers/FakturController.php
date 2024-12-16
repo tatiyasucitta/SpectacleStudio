@@ -5,13 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Faktur;
 use App\Models\Cart;
+use App\Models\Product;
 
 
 class FakturController extends Controller
 {
     public function save(Request $request){
         // dd($request);
-        $faktur = Faktur::latest('id')->first();
+        $faktur = Faktur::create([
+            'invoice'=> $request->invoice
+        ]);
+        $items= Cart::all();
+
+        for($i=0 ; $i< count($items) ; $i++){
+            if(!$items[$i]->invoice_id){
+                $items[$i]->invoice_id = $request->invoice;
+                $items[$i]->faktur_id = $faktur->id;
+                $items[$i]->save();
+            }
+        }
+        // $id = Faktur::latest('id')->first();
         // dd($faktur);
         $request->validate([
             'name'=>'required|string|min:5|max:100',
@@ -24,6 +37,22 @@ class FakturController extends Controller
             'phone' =>$request->phone,
             'address' =>$request->address,
         ]);
+
+        $cart= Cart::all();
+        $invoice = $faktur->invoice;
+        $a =0;
+        for($i =0 ; $i <count($cart) ; $i++){
+            if($cart[$i]->invoice_id == $invoice){
+                $product = Product::where('id', $cart[$i]->product_id)->first();
+                $product->stock -= $cart[$i]->quantity;
+                $product->save();
+                // dd($product);
+                $a++;
+            }
+        }
+        // $product = Product::where('id', $cart[$i]->product_id)->first();
+        // $product->quantity -= $cart[$i]->quantity;
+
         return redirect('/')->with('success', 'facture saved in history!');
     }
     

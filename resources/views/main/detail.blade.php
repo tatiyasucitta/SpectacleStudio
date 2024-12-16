@@ -4,7 +4,7 @@
     <div class="product-details p-4">
         <h1 class="mb-3">{{ $product->name }}</h1>
         <div class="d-flex">
-            <img src="{{ asset('/storage/public/images/products/'.$product->image) }}" alt="{{ $product->name }}" class="img-fluid mb-3 me-4" style="max-width: 500px; height: auto;">
+            <img src="{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid mb-3 me-4" style="max-width: 500px; height: auto;">
             <div>
                 <p class="mb-2">{{ $product->description }}</p>
                 <p class="mb-2">${{ $product->price }}</p>

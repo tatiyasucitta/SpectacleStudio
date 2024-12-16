@@ -12,10 +12,11 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('stock', '>', 0)->whereNotNull('stock')->get();
         $cats = Category::all();
         return view('main.home', compact('products', 'cats'));
     }
+
     public function adminshow(){
         $products = Product::all();
         return view('main.products', ['products'=>$products]);
@@ -23,7 +24,7 @@ class ProductController extends Controller
     
     public function showAllProducts()
     {
-        $products = Product::all();
+        $products = Product::where('stock', '>', 0)->get();        
         return view('main.products', compact('products'));
     }
     
@@ -31,18 +32,6 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         return view('main.detail', compact('product'));
-    }
-
-    public function productsPage()
-    {
-        $products = Product::all();
-        return view('main.products', compact('products'));
-    }
-
-    public function categoriesPage()
-    {
-        $categories = Category::all();
-        return view('main.categories', compact('categories'));
     }
 
     public function showByCategory($id)
@@ -61,31 +50,26 @@ class ProductController extends Controller
             'name'=>'required|min:5|max:80',
             'category_id' =>'required',
             'description' => 'required',
-            'image' => 'mimes:jpeg, png, jpg',
+            'image' => 'required|mimes:jpeg, png, jpg',
             'price'=>'required|numeric',
             'stock'=>'required|numeric'
         ]);
 
-        $input = $request->all();
-
-        if($request->hasFile('image')){
-            $destination_path = 'public/images/products';
-            $image = $request->file('image');
-            $img_name = $image->getClientOriginalName();
-            $image_name = Str::random(3) . '_' . $img_name;
-            $path = $request->file('image')->storeAs($destination_path, $image_name);
-        
-            $input['image'] = $image_name;
-        }
+        $file = $request->file('image');
+        $contents = file_get_contents($file->getRealPath());
+        $base64 = base64_encode($contents);
+        $mimeType = $file->getMimeType();
+        $base64Data = 'data:' . $mimeType . ';base64,' . base64_encode($contents);
         
         Product::create([
             'name' => $request->name,
             'category_id' => $request->category_id,
             'description' => $request->description,
-            'image'=> $image_name,
+            'image'=> $base64Data,
             'price' => $request->price,
             'stock' => $request->stock
         ]);
+        
         return redirect('/admin/dashboard')->with('success', 'Product added!');
     }
 
@@ -110,23 +94,17 @@ class ProductController extends Controller
             'stock'=>'required|numeric'
         ]);
 
-        $input = $request->all();
-
-        if($request->hasFile('image')){
-            $destination_path = 'public/images/products';
-            $image = $request->file('image');
-            $img_name = $image->getClientOriginalName();
-            $image_name = Str::random(10) . '_' . $img_name;
-            $path = $request->file('image')->storeAs($destination_path, $image_name);
-        
-            $input['image'] = $image_name;
-        }
+        $file = $request->file('image');
+        $contents = file_get_contents($file->getRealPath());
+        $base64 = base64_encode($contents);
+        $mimeType = $file->getMimeType();
+        $base64Data = 'data:' . $mimeType . ';base64,' . base64_encode($contents);
 
         
         $products->update([
             'name' => $request->name,
             'category_id' => $request->category_id,
-            'image' =>$image_name,
+            'image' =>$base64Data,
             'price' => $request->price,
             'stock' => $request->stock
         ]);

@@ -23,8 +23,12 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/update/{id}',[ProductController::class, 'update'])->name('update');
         Route::patch('/updated/{id} ',[ProductController::class, 'updated'])->name('updated');
         Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+        
         Route::get('/createcategory', [CategoryController::class, 'create'])->name('createcategory');
         Route::post('/createdcategory', [CategoryController::class, 'created'])->name('createdcategory');
+        Route::get('/updatecategory-form/{id}', [CategoryController::class, 'updateForm'])->name('update.category.form');
+        Route::patch('/updatecategory/{id}', [CategoryController::class, 'update'])->name('update.category');
+        Route::delete('/delete/category/{id}', [CategoryController::class, 'delete'])->name('delete.category');
     });
     Route::post('/logout',[Usercontroller::class, 'logout'])->name('logout');
     
@@ -32,9 +36,10 @@ Route::middleware(['auth'])->group(function(){
     
     Route::get('/', [ProductController::class, 'index'])->name('home');
     Route::get('/products', [ProductController::class, 'showAllProducts'])->name('products.all');
-    Route::get('/categories', [ProductController::class, 'categoriesPage'])->name('categories');
     Route::get('/category/{id}', [ProductController::class, 'showByCategory'])->name('category.show');
     Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.detail');
+
+    Route::get('/categories', [CategoryController::class, 'categoriesPage'])->name('categories');
     
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
     Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');

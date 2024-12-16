@@ -8,7 +8,7 @@ use HasFactory;
 class Category extends Model
 {
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'image'];
 
     public function product()
     {

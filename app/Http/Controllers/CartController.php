@@ -36,15 +36,18 @@ class CartController extends Controller
     {
         $product = Product::findOrFail($id);
         $cartItem = Cart::where('product_id', $id)->first();
-        if ($cartItem) {
+        if ($cartItem && !$cartItem->invoice_id) {
             $cartItem->quantity += $request->input('quantity', 1);
+            
             $cartItem->save();
         } else {
             Cart::create([
                 'product_id' => $product->id,
-                'quantity' => $request->input('quantity', 1),
+                'quantity' => $request->quantity,
             ]);
+
         }
+
 
         return redirect()->route('cart.view')->with('success', 'Product added to cart!');
     }
@@ -67,23 +70,13 @@ class CartController extends Controller
                 $a++;
             }
         }
-        $invoice = '000.' . rand(100,1000) . '-' . Str::random(10) . '.' . rand(100,1000);
-        $faktur = Faktur::create([
-            'invoice'=> $invoice
-        ]);
-        // $id = Faktur::latest('id')->first();
-        for($i= 0 ; $i< count($items) ; $i++){
-            $items[$i]->invoice_id = $invoice;
-            $items[$i]->faktur_id = $faktur->id;
-            $items[$i]->save();
-        }
         return redirect('/faktur');
     }
 
     public function faktur(){
+        // $product = Product::All();
         $cart = Cart::all();
-        $faktur = Faktur::latest('id')->first();
-        $invoice = $faktur->invoice;
+        $invoice = '000.' . rand(100,1000) . '-' . Str::random(10) . '.' . rand(100,1000);
         $a =0;
         $items = array();
         for($i =0 ; $i <count($cart) ; $i++){
@@ -98,6 +91,7 @@ class CartController extends Controller
         for($i = 0 ; $i< count($items) ; $i++){
             $total += $items[$i]->product[0]->price*$items[$i]->quantity;
         }
+
         return view('main.checkout', ['items'=>$items,
         'total' => $total,
         'invoice'=> $invoice]);
