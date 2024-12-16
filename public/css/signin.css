@@ -1,0 +1,81 @@
+
+body{
+    height: 100%;
+    margin: 0;
+    font-family: Inter, sans-serif;
+    background-color: #f4f4f2;
+}
+.content-signin{
+    height:100vh;
+}
+.left-side {
+    background-color: #736960;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 750px;
+}
+.right-side {
+    background-color: #f4f4f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-container {
+    max-width: 400px;
+    width: 100%;
+}
+.form-container h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.form-label {
+    color: #736960;
+    font-size: 20px;
+}
+.form-header {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.form-control {
+    background-color: #f4f4f2;
+    border: none;
+    border-bottom: 1px solid #736960;
+    border-radius: 0;
+    margin-bottom: 20px;
+}
+.form-check-label {
+    font-size: 15px;
+    color: #736960;
+    
+}
+.btn-register {
+    background-color: #736960;
+    color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 10px;
+}
+.btn-register:hover {
+    background-color: #5d5046;
+}
+.logo {
+    width: 259px;
+    height: 107px;
+}
+.forgot-password {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    color: #736960;
+    text-decoration: none;
+}
+.forgot-password:hover {
+    text-decoration: underline;
+    color: #5d5046;
+}
