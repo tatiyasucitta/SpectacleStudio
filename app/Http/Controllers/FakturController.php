@@ -65,7 +65,7 @@ class FakturController extends Controller
     public function detailinvoice($id){
         $faktur = Faktur::find($id);
         $invoice = $faktur->invoice;
-        $cart = Cart::all();
+        $cart = Cart::where('invoice_id', $invoice)->get();
         $items = array();
         $a=0;
         for($i = 0; $i < count($cart) ; $i++){
