@@ -10,6 +10,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Product Image</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
@@ -19,6 +20,9 @@
         <tbody>
             @foreach($items as $item)
             <tr>
+                <td class="text-center">
+                    <img src="{{ $item->product[0]->image }}" alt="{{ $item->product[0]->name }}" class="img-fluid" style="max-width: 200px; height: auto; display: block; margin: 0 auto;">
+                </td>
                 <td>{{ $item->product[0]->name }}</td>
                 <td>${{ $item->product[0]->price }}</td>
                 <td>{{ $item->quantity }}</td>
