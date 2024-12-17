@@ -57,7 +57,7 @@ class UserController extends Controller
         }else{
             return back()->withErrors('The provided credentials do not match out records.');
         }
-        return redirect('/');
+        return redirect('/', ['user' => $user]);
     }
 
     public function logout(){

@@ -40,7 +40,7 @@
     
     <!-- Address and Payment Form -->
     <h4>Checkout</h4>
-    <form action="{{route('save')}}" method="POST" id="address-form" class="mb-5">
+    <form action="{{route('save', $user->id)}}" method="POST" id="address-form" class="mb-5">
         @csrf
         <label for="invoice" class="form-label">Invoice Number:</label>
         <input type="text" class="form-control" id="invoice" name="invoice" value="{{$invoice}}" placeholder="{{$invoice}}" aria-label="Disabled input example" readonly>

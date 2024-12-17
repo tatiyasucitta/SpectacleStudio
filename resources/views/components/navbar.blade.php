@@ -32,11 +32,12 @@
         </div>
         <div class="nav-left">
             <ul class="navbar-nav">
+                
                 @if(!Auth::user())
-                    <li class="nav-item">
-                        <a class="nav-link text-light {{ request()->is('/') ? 'active' : '' }}" href="{{ route('login') }}">Sign In</a>
-                    </li>
-                    <li class="nav-item">
+                <li class="nav-item">
+                    <a class="nav-link text-light {{ request()->is('/') ? 'active' : '' }}" href="{{ route('login') }}">Sign In</a>
+                </li>
+                <li class="nav-item">
                         <a class="nav-link text-light {{ request()->is('/') ? 'active' : '' }}" href="{{ route('register.form') }}">Sign Up</a>
                     </li>
                 @else
@@ -46,8 +47,8 @@
                             <button class="nav-link btn btn-light" style="background-color: #F4F4F2;" type="submit">Log Out</button>
                         </li>
                     </form>
-                @endif
-            </ul>
-        </div>
+                    @endif
+                </ul>
+            </div>
     </div>
 </nav>

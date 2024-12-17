@@ -18,7 +18,7 @@ return new class extends Migration
                     ->references('id')
                     ->on('products')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade');                
+                    ->onDelete('cascade');                                
                 $table->unsignedbiginteger('faktur_id')->nullable();
                 $table->foreign('faktur_id')
                     ->references('id')

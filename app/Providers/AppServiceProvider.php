@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use App\Http\View\UserComposer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +19,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        //
-    }
+        public function boot(): void
+        {
+            View::composer('*', UserComposer::Class);
+        }
 }

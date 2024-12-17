@@ -60,7 +60,7 @@ class CartController extends Controller
         return redirect()->route('cart.view')->with('success', 'Product removed from cart!');
     }
 
-    public function checkout(){
+    public function checkout($id){
         $item = Cart::all();
         $items = array();
         $a =0;
@@ -70,7 +70,7 @@ class CartController extends Controller
                 $a++;
             }
         }
-        return redirect('/faktur');
+        return redirect('/faktur')->with('id', 'id');
     }
 
     public function faktur(){
@@ -86,7 +86,7 @@ class CartController extends Controller
             }
         }
         $total = 0;
-        // dd($items);  
+        // dd($id);  
         
         for($i = 0 ; $i< count($items) ; $i++){
             $total += $items[$i]->product[0]->price*$items[$i]->quantity;

@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('invoice')->nullable();
             $table->string('address')->nullable();
+            $table->unsignedbiginteger('user_id')->nullable();
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

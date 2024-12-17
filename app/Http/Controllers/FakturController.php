@@ -10,11 +10,13 @@ use App\Models\Product;
 
 class FakturController extends Controller
 {
-    public function save(Request $request){
+    public function save(Request $request, $id){
         // dd($request);
         $faktur = Faktur::create([
-            'invoice'=> $request->invoice
+            'invoice'=> $request->invoice,
+            'user_id' => $id
         ]);
+
         $items= Cart::all();
 
         for($i=0 ; $i< count($items) ; $i++){
@@ -74,6 +76,8 @@ class FakturController extends Controller
                 $a++;
             }
         }
+        // dd($items);
+
         $total =0;
         for($i =0 ; $i < $a ; $i++){
             $total += $items[$i]->product[0]->price*$items[$i]->quantity;

@@ -30,7 +30,7 @@
                         <img src="{{ $items[$i]->product[0]->image }}" class="card-img-top w-25" alt="">
                     </td>
                     <td>
-                        <p class="card-price">{{$items[$i]->product[0]->stock}}</p>
+                        <p class="card-price">{{$items[$i]->quantity}}</p>
                     </td>
                     <td>
                         <p class="card-price">${{$items[$i]->product[0]->price}}</p>

@@ -11,9 +11,13 @@ class Faktur extends Model
         'name',
         'phone',
         'address',
+        'user_id'
     ];
 
     public function Cart(){
         return $this->hasMany(Cart::class,'faktur_id');
+    }
+    public function User(){
+        return $this->belongsTo(User::class,'user_id');
     }
 }
