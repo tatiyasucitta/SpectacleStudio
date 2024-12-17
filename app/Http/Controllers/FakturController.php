@@ -26,8 +26,7 @@ class FakturController extends Controller
                 $items[$i]->save();
             }
         }
-        // $id = Faktur::latest('id')->first();
-        // dd($faktur);
+
         $request->validate([
             'name'=>'required|string|min:5|max:100',
             'phone'=>'required|string|min:5|max:100',
@@ -48,42 +47,30 @@ class FakturController extends Controller
                 $product = Product::where('id', $cart[$i]->product_id)->first();
                 $product->stock -= $cart[$i]->quantity;
                 $product->save();
-                // dd($product);
                 $a++;
             }
         }
-        // $product = Product::where('id', $cart[$i]->product_id)->first();
-        // $product->quantity -= $cart[$i]->quantity;
-
+     
         return redirect('/')->with('success', 'facture saved in history!');
     }
     
     public function history(){
         $faktur = faktur::All();
         return view('main.history', ['fakturs'=> $faktur]);
-        // $ada = Cart::where('item_id', $id)->first();
     }
 
     public function detailinvoice($id){
         $faktur = Faktur::find($id);
         $invoice = $faktur->invoice;
         $cart = Cart::where('invoice_id', $invoice)->get();
-        $items = array();
-        $a=0;
-        for($i = 0; $i < count($cart) ; $i++){
-            if($cart[$i]->faktur_id == $id){
-                $items[$a] = $cart[$i];
-                $a++;
-            }
-        }
-        // dd($items);
 
         $total =0;
-        for($i =0 ; $i < $a ; $i++){
-            $total += $items[$i]->product[0]->price*$items[$i]->quantity;
+
+        for($i =0 ; $i < count($cart) ; $i++){
+            $total += $cart[$i]->product[0]->price*$cart[$i]->quantity;
         }
-        // dd($items);
-        return view('main.detailInvoice', ['items'=> $items,
+
+        return view('main.detailInvoice', ['items'=> $cart,
                                         'total'=> $total,
                                         'invoice'=> $invoice]);
     }

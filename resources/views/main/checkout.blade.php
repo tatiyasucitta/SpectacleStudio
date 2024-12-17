@@ -56,7 +56,6 @@
             <input type="text" class="form-control" id="address" name="address" required>
         </div>
         
-
         <button type="submit" class="btn" style="background-color: #736960; color: white; padding: 10px 20px;">Checkout</button>
     </form>
 

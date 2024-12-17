@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/products', [ProductController::class, 'showAllProducts'])->name('products.all');
     Route::get('/category/{id}', [ProductController::class, 'showByCategory'])->name('category.show');
     Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.detail');
-
+    
     Route::get('/categories', [CategoryController::class, 'categoriesPage'])->name('categories');
     
     Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
@@ -49,8 +49,6 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/save/{id}', [FakturController::class, 'save'])->name('save');
     Route::get('/history', [FakturController::class, 'history'])->name('history');
     Route::get('/detailinvoice/{id}', [FakturController::class, 'detailinvoice'])->name('detailinvoice');
-    Route::get('/carts', [CartController::class, 'view'])->name('viewcart');
-
 });
 
 
