@@ -45,7 +45,7 @@
             </tbody>
         </table>
         <h3 style="padding: 10px; background-color: #f2f2f2;">Total Price: ${{ $total }}</h3>
-        <a href="{{ route('checkout', $user->id) }}" class="d-block">
+        <a href="{{ route('checkout') }}" class="d-block">
             <button class="btn btn-block btn-primary" style="background-color: #736960; color: white; padding: 10px;">Check Out</button>
         </a>    
     @endif

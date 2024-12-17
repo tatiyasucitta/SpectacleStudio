@@ -13,10 +13,11 @@
             <thead>
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Quantity</th>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -24,16 +25,19 @@
                 <tr>
                     <th scope="row">{{$i+1}}</th>
                     <td>
+                        <img src="{{ $items[$i]->product[0]->image }}" class="card-img-top w-25" alt="">
+                    </td>
+                    <td>
                         <h5 class="card-title">{{$items[$i]->product[0]->name}}</h5>
                     </td>
                     <td>
-                        <img src="{{ $items[$i]->product[0]->image }}" class="card-img-top w-25" alt="">
+                        <p class="card-price">${{$items[$i]->product[0]->price}}</p>
                     </td>
                     <td>
                         <p class="card-price">{{$items[$i]->quantity}}</p>
                     </td>
                     <td>
-                        <p class="card-price">${{$items[$i]->product[0]->price}}</p>
+                        <p class="card-price">${{ $items[$i]->quantity * $items[$i]->product[0]->price }}</p>
                     </td>
                 </tr>
             @endfor

@@ -14,7 +14,6 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Total</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -24,12 +23,7 @@
                 <td>${{ $item->product[0]->price }}</td>
                 <td>{{ $item->quantity }}</td>
                 <td>${{ $item->quantity * $item->product[0] ->price }}</td>
-                <td>
-                    <form action="{{ route('cart.remove', $item->id) }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Remove</button>
-                        </form>
-                    </td>
+
                 </tr>
                 @endforeach
             </tbody>
@@ -56,10 +50,6 @@
         <div class="mb-3">
             <label for="address" class="form-label">Full Address</label>
             <input type="text" class="form-control" id="address" name="address" required>
-        </div>
-        <div class="mb-3">
-            <label for="billing-address" class="form-label">Billing Address (if different from shipping address)</label>
-            <input type="text" class="form-control" id="billing-address" name="billing_address">
         </div>
         
 

@@ -45,8 +45,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
     Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
     
-    Route::get('/checkout/{id}', [CartController::class, 'checkout'])->name('checkout');
-    Route::get('/faktur', [CartController::class, 'faktur'])->name('faktur');
+    Route::get('/faktur', [CartController::class, 'faktur'])->name('checkout');
     Route::post('/save/{id}', [FakturController::class, 'save'])->name('save');
     Route::get('/history', [FakturController::class, 'history'])->name('history');
     Route::get('/detailinvoice/{id}', [FakturController::class, 'detailinvoice'])->name('detailinvoice');

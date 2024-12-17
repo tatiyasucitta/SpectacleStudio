@@ -23,7 +23,6 @@ class CartController extends Controller
                 $a++;
             }
         }
-        // dd($items);
 
         for($i = 0 ; $i< count($items) ; $i++){
             $total += $items[$i]->product[0]->price*$items[$i]->quantity;
@@ -60,38 +59,25 @@ class CartController extends Controller
         return redirect()->route('cart.view')->with('success', 'Product removed from cart!');
     }
 
-    public function checkout($id){
+    public function faktur(){
         $item = Cart::all();
+        $invoice = '000.' . rand(100,1000) . '-' . Str::random(10) . '.' . rand(100,1000);
         $items = array();
         $a =0;
+        
         for($i=0 ; $i< count($item) ; $i++){
             if(!$item[$i]->faktur_id){
                 $items[$a] = $item[$i];
                 $a++;
             }
         }
-        return redirect('/faktur')->with('id', 'id');
-    }
-
-    public function faktur(){
-        // $product = Product::All();
-        $cart = Cart::all();
-        $invoice = '000.' . rand(100,1000) . '-' . Str::random(10) . '.' . rand(100,1000);
-        $a =0;
-        $items = array();
-        for($i =0 ; $i <count($cart) ; $i++){
-            if($cart[$i]->invoice_id == $invoice){
-                $items[$a] = $cart[$i];
-                $a++;
-            }
-        }
+        // dd($items);
         $total = 0;
-        // dd($id);  
         
         for($i = 0 ; $i< count($items) ; $i++){
             $total += $items[$i]->product[0]->price*$items[$i]->quantity;
         }
-
+        // dd($total);
         return view('main.checkout', ['items'=>$items,
         'total' => $total,
         'invoice'=> $invoice]);
